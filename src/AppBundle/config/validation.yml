@@ -1,0 +1,20 @@
+AppBundle\Entity\User:
+    constraints:
+            - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+    properties:
+        firstname:
+            - NotBlank: ~
+            - Type: string
+        lastname:
+            - NotBlank: ~
+            - Type: string
+        email:
+            - NotBlank: ~
+            - Type: string
+
+AppBundle\Entity\Contact:
+    properties:
+        gender:
+            - NotNull: ~
+            - Choice:
+                choices: [M, F]

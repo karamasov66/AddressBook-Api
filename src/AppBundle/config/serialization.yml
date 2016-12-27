@@ -1,0 +1,35 @@
+# src/AppBundle/Resources/config/serialization.yml
+AppBundle\Entity\User:
+    attributes:
+        id:
+            groups: ['user', 'contact']
+        surname:
+            groups: ['user', 'contact']
+        lastname:
+            groups: ['user', 'contact']
+        email:
+            groups: ['user', 'contact']
+        contacts:
+            groups: ['user']
+
+
+AppBundle\Entity\Contact:
+    attributes:
+        id:
+            groups: ['user', 'contact']
+        gender:
+            groups: ['user', 'contact']
+        firstname:
+            groups: ['user', 'contact']
+        lastname:
+            groups: ['user', 'contact']
+        street:
+            groups: ['user', 'contact']
+        city:
+            groups: ['user', 'contact']
+        postcode:
+            groups: ['user', 'contact']
+        createdOn:
+            groups: ['user', 'contact']
+        users:
+            groups: ['contact']
