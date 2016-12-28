@@ -44,14 +44,26 @@ class User
     private $email;
 
     /**
-     * @var Contact
+     * @ORM\Column(type="string")
+     */
+    protected $password;
+
+    protected $plainPassword;
+
+    /**
      *
-     * @ORM\OneToMany(targetEntity="Contact", mappedBy="users", cascade={"persist"})
+     * @ORM\Column(name="createdOn", type="datetime", nullable= true)
+     */
+    private $createdOn;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Contact", cascade={"persist"})
      */
     private $contacts;
 
     public function __construct()
     {
+        $this->createdOn = new \DateTime();
         $this->contacts = new ArrayCollection();
     }
 
@@ -135,6 +147,26 @@ class User
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set createdOn
+     *
+     * @return $this
+     */
+    public function setCreatedOn($createdOn)
+    {
+        $this->createdOn = $createdOn;
+
+        return $this;
+    }
+
+    /**
+     * Get createdOn
+     */
+    public function getCreatedOn()
+    {
+        return $this->createdOn;
     }
 
     /**

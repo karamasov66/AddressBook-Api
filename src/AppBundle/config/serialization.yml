@@ -2,13 +2,13 @@
 AppBundle\Entity\User:
     attributes:
         id:
-            groups: ['user', 'contact']
+            groups: ['user', 'contact', 'auth-token']
         surname:
-            groups: ['user', 'contact']
+            groups: ['user', 'contact', 'auth-token']
         lastname:
-            groups: ['user', 'contact']
+            groups: ['user', 'contact', 'auth-token']
         email:
-            groups: ['user', 'contact']
+            groups: ['user', 'contact', 'auth-token']
         contacts:
             groups: ['user']
 
@@ -33,3 +33,14 @@ AppBundle\Entity\Contact:
             groups: ['user', 'contact']
         users:
             groups: ['contact']
+
+AppBundle\Entity\AuthToken:
+    attributes:
+        id:
+            groups: ['auth-token']
+        value:
+            groups: ['auth-token']
+        createdAt:
+            groups: ['auth-token']
+        user:
+            groups: ['auth-token']

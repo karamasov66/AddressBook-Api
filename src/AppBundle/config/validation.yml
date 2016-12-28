@@ -10,7 +10,13 @@ AppBundle\Entity\User:
             - Type: string
         email:
             - NotBlank: ~
+            - Email: ~
+        plainPassword:
+            - NotBlank: { groups: [New, FullUpdate] }
             - Type: string
+            - Length:
+                min: 4
+                max: 50
 
 AppBundle\Entity\Contact:
     properties:
@@ -18,3 +24,12 @@ AppBundle\Entity\Contact:
             - NotNull: ~
             - Choice:
                 choices: [M, F]
+
+AppBundle\Entity\Credentials:
+    properties:
+        login:
+            - NotBlank: ~
+            - Type: string
+        password:
+            - NotBlank: ~
+            - Type: string

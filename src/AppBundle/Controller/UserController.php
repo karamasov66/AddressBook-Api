@@ -49,17 +49,21 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_CREATED)
+     * @Rest\View(serializerGroups={"user"}, statusCode=Response::HTTP_CREATED)
      * @Rest\Post("/users")
      */
     public function postUserAction(Request $request)
     {
         $user = new User();
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, ['validation_groups'=>['Default', 'New']]);
         $form->submit($request->request->all());
 
         if ($form->isValid()){
+            $encoder = $this->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($encoded);
+
             $em = $this->get('doctrine.orm.entity_manager');
             $em->persist($user);
             $em->flush();
@@ -99,13 +103,24 @@ class UserController extends Controller
             return $this->userNotFound();
         }
 
-        $form = $this->createForm(UserType::class, $user);
+        if ($clearMissing) {
+            $options = ['validation_groups'=>['Default', 'FullUpdate']];
+        } else {
+            $options = [];
+        }
+
+        $form = $this->createForm(UserType::class, $user, $options);
 
         $form->submit($request->request->all(), $clearMissing);
 
         if ($form->isValid()) {
+            if (!empty($user->getPlainPassword())) {
+                $encoder = $this->get('security.password_encoder');
+                $encoded = $encoder->encodePassword($user, $user->getPlainPassword());
+                $user->setPassword($encoded);
+            }
             $em = $this->get('doctrine.orm.entity_manager');
-            $em->persist($user);
+            $em->merge($user);
             $em->flush();
             return $user;
         } else {
