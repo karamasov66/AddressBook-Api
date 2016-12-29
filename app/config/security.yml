@@ -20,6 +20,10 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        doc:
+            pattern: ^/documentation
+            security: false
+
         main:
             methods: [POST, PUT, PATCH, DELETE]
             pattern: ^/
@@ -28,3 +32,8 @@ security:
                 authenticator: auth_token_authenticator
             provider: auth_token_user_provider
             anonymous: ~
+
+        new_user:
+            pattern: /users
+            methods: [PUT, PATCH, DELETE]
+            security: false

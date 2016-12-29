@@ -7,6 +7,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
 
 framework:
     #esi:             ~
@@ -18,7 +19,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    serializer:      { enable_annotations: true }
+    serializer:      { enable_annotations: false }
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -71,6 +72,8 @@ swiftmailer:
     spool:     { type: memory }
 
 fos_rest:
+    serializer:
+        serialize_null:  true
     routing_loader:
         include_format: false
     view:
@@ -81,3 +84,39 @@ fos_rest:
     format_listener:
         rules:
             - { path: '^/', priorities: ['json','xml'], fallback_format: 'json' }
+
+jms_serializer:
+    handlers:
+        datetime:
+            default_format: "Y-m-d\\TH:i:sP"
+            default_timezone: "UTC"
+
+nelmio_api_doc:
+    sandbox:
+        enabled:  true
+        endpoint: http://localhost/AddressBook-Api/web/app_dev.php/
+
+        authentication:
+            name: X-Auth-Token
+            delivery: header
+
+        accept_type: application/json
+
+        body_format:
+            formats: [ json, xml ]
+            default_format: json
+
+        request_format:
+            formats:
+                json: application/json
+                xml: application/xml
+
+            method: accept_header
+            default_format: json
+    swagger:
+        api_base_path:        /
+        swagger_version:      '1.2'
+        api_version:          '1.0.0'
+        info:
+            title:                AddressBook-Api
+            description:          "Carnet d'adresse en ligne"

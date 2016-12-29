@@ -3,7 +3,7 @@ AppBundle\Entity\User:
     attributes:
         id:
             groups: ['user', 'contact', 'auth-token']
-        surname:
+        firstname:
             groups: ['user', 'contact', 'auth-token']
         lastname:
             groups: ['user', 'contact', 'auth-token']
@@ -31,8 +31,6 @@ AppBundle\Entity\Contact:
             groups: ['user', 'contact']
         createdOn:
             groups: ['user', 'contact']
-        users:
-            groups: ['contact']
 
 AppBundle\Entity\AuthToken:
     attributes:
@@ -40,7 +38,7 @@ AppBundle\Entity\AuthToken:
             groups: ['auth-token']
         value:
             groups: ['auth-token']
-        createdAt:
+        createdOn:
             groups: ['auth-token']
         user:
             groups: ['auth-token']

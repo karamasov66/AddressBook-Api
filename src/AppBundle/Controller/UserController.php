@@ -10,13 +10,20 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 
 class UserController extends Controller
 {
     /**
+     * @ApiDoc(
+     *     resource=true,
+     *    description="Récupère la liste des utilisateurs de l'application",
+     *    output= { "class"=User::class }
+     * )
+     * 
      * @Rest\Get("/users")
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"user"})
      */
     public function getUsersAction()
     {
@@ -29,8 +36,14 @@ class UserController extends Controller
     }
 
     /**
+     * @ApiDoc(
+     *     resource=true,
+     *    description="Récupère un utilisateur de l'application",
+     *    output= { "class"=Contact::class }
+     * )
+     * 
      * @Rest\Get("/users/{user_id}")
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"user"})
      * @param Request $request
      * @return User 
      */
@@ -49,6 +62,20 @@ class UserController extends Controller
     }
 
     /**
+     * @ApiDoc(
+     *     resource=true,
+     *    description="Crée un utilisateur dans l'application",
+     *    input={"class"=UserType::class, "name"=""},
+     *    statusCodes = {
+     *        201 = "Création avec succès",
+     *        400 = "Formulaire invalide"
+     *    },
+     *    responseMap={
+     *         201 = {"class"=User::class, "groups"={"user"}},
+     *         400 = { "class"=UserType::class, "form_errors"=true, "name" = ""}
+     *    }
+     * )
+     * 
      * @Rest\View(serializerGroups={"user"}, statusCode=Response::HTTP_CREATED)
      * @Rest\Post("/users")
      */
@@ -74,9 +101,22 @@ class UserController extends Controller
     }
 
     /**
+     * @ApiDoc(
+     *     resource=true,
+     *    description="Met à jour entièrement un utilisateur",
+     *    input={"class"=UserType::class, "name"=""},
+     *    statusCodes = {
+     *        200 = "Requête traitée avec succès",
+     *        400 = "Formulaire invalide"
+     *    },
+     *    responseMap={
+     *         200 = {"class"=User::class, "groups"={"user"}},
+     *         400 = { "class"=UserType::class, "form_errors"=true, "name" = ""}
+     *    }
+     * )
+     * 
      * @Rest\View()
      * @Rest\Put("users/{id}")
-     * @param Request $request
      */
     public function updateUserAction(Request $request)
     {
@@ -84,6 +124,20 @@ class UserController extends Controller
     }
 
     /**
+     * @ApiDoc(
+     *     resource=true,
+     *    description="Met à jour partiellement un utilisateur",
+     *    input={"class"=UserType::class, "name"=""},
+     *    statusCodes = {
+     *        200 = "Requête traitée avec succès",
+     *        400 = "Formulaire invalide"
+     *    },
+     *    responseMap={
+     *         200 = {"class"=User::class, "groups"={"user"}},
+     *         400 = { "class"=UserType::class, "form_errors"=true, "name" = ""}
+     *    }
+     * )
+     * 
      * @Rest\View()
      * @Rest\Patch("/users/{id}")
      */
@@ -129,6 +183,15 @@ class UserController extends Controller
     }
 
     /**
+     * @ApiDoc(
+     *     resource=true,
+     *    description="Supprime un utilisateur",
+     *     statusCodes = {
+     *        200 = "Supprimé avec succès",
+     *        404 = "Ressource non trouvé"
+     *    }
+     *)
+     * 
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
      * @Rest\Delete("/users/{id}")
      * @param Request $request

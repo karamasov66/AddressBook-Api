@@ -9,10 +9,25 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use AppBundle\Entity\AuthToken;
 use AppBundle\Entity\Credentials;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class AuthTokenController extends Controller
 {
     /**
+     * @ApiDoc(
+     *     resource=true,
+     *    description="Crée un token d'authentification",
+     *    input={ "class" = CredentialsType::class, "name"=""},
+     *    statusCodes = {
+     *        201 = "Création avec succès",
+     *        400 = "Formulaire invalide"
+     *    },
+     *    responseMap={
+     *         201 = {"class"=AuthToken::class, "groups"={"auth-token"}},
+     *         400 = { "class"=CredentialsType::class, "fos_rest_form_errors"=true, "name" = ""}
+     *    }
+     * )
+     * 
      * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"auth-token"})
      * @Rest\Post("/auth-tokens")
      */
@@ -55,6 +70,11 @@ class AuthTokenController extends Controller
     }
 
     /**
+     * @ApiDoc
+     * resource=true,
+     *    description="Supprime un token d'authentification"
+     *)
+     *
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
      * @Rest\Delete("/auth-tokens/{id}")
      */
@@ -71,7 +91,7 @@ class AuthTokenController extends Controller
             $em->remove($authToken);
             $em->flush();
         } else {
-            return \FOS\RestBundle\View\View::create(['message' => 'Bad Request'], Response::HTTP_BAD_REQUEST);
+            return \FOS\RestBundle\View\View::create(['message' => 'Invalid data'], Response::HTTP_BAD_REQUEST);
         }
     }
 

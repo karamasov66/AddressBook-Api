@@ -11,13 +11,22 @@ use AppBundle\Entity\User;
 use AppBundle\Entity\Contact;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 
 class ContactController extends Controller
 {
     /**
-     * @Rest\Get("/users/{user_id}/contacts")
+     * @ApiDoc(
+     *     resource=true,
+     *    description="Récupère la liste des contacts d'un utilisateur",
+     *    output= { "class"=Contact::class }
+     * )
+     *
      * @Rest\View()
+     * @Rest\Get("/users/{user_id}/contacts")
+     * @return JsonResponse
+     * @param Request $request
      */
     public function getContactsAction(Request $request)
     {
@@ -32,6 +41,12 @@ class ContactController extends Controller
     }
 
     /**
+     * @ApiDoc(
+     *     resource=true,
+     *    description="Récupère un contact",
+     *    output= { "class"=Contact::class }
+     * )
+     *
      * @Rest\Get("/contacts/{id}")
      * @Rest\View()
      */
@@ -50,6 +65,20 @@ class ContactController extends Controller
     }
 
     /**
+     * @ApiDoc(
+     *     resource=true,
+     *    description="Crée un contact dans l'application",
+     *    input={"class"=ContactType::class, "name"=""},
+     *    statusCodes = {
+     *        201 = "Création avec succès",
+     *        400 = "Formulaire invalide"
+     *    },
+     *    responseMap={
+     *         201 = {"class"=Contact::class, "groups"={"contact"}},
+     *         400 = { "class"=ContactType::class, "form_errors"=true, "name" = ""}
+     *    }
+     * )
+     *
      * @Rest\View(statusCode=Response::HTTP_CREATED)
      * @Rest\Post("/users/{user_id}/contacts")
      */
@@ -76,9 +105,22 @@ class ContactController extends Controller
     }
 
     /**
+     * @ApiDoc(
+     *     resource=true,
+     *    description="Met à jour entièrement un contact",
+     *    input={"class"=ContactType::class, "name"=""},
+     *    statusCodes = {
+     *        200 = "Requête traitée avec succès",
+     *        400 = "Formulaire invalide"
+     *    },
+     *    responseMap={
+     *         200 = {"class"=Contact::class, "groups"={"contact"}},
+     *         400 = { "class"=ContactType::class, "form_errors"=true, "name" = ""}
+     *    }
+     * )
+     *
      * @Rest\View()
      * @Rest\Put("/contacts/{id}")
-     * @param Request $request
      */
     public function updateContactAction(Request $request)
     {
@@ -86,6 +128,20 @@ class ContactController extends Controller
     }
 
     /**
+     * @ApiDoc(
+     *     resource=true,
+     *    description="Met à jour partiellement un contact",
+     *    input={"class"=ContactType::class, "name"=""},
+     *    statusCodes = {
+     *        200 = "Requête traitée avec succès",
+     *        400 = "Formulaire invalide"
+     *    },
+     *    responseMap={
+     *         200 = {"class"=Contact::class, "groups"={"contact"}},
+     *         400 = { "class"=ContactType::class, "form_errors"=true, "name" = ""}
+     *    }
+     * )
+     *
      * @Rest\View()
      * @Rest\Patch("/contacts/{id}")
      */
@@ -119,6 +175,15 @@ class ContactController extends Controller
     }
 
     /**
+     * @ApiDoc(
+     *    resource=true,
+     *    description="Supprime un contact",
+     *    statusCodes = {
+     *        200 = "Supprimé avec succès",
+     *        404 = "Ressource non trouvé"
+     *    }
+     *
+     *)
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
      * @Rest\Delete("/contacts/{id}")
      * @param Request $request
