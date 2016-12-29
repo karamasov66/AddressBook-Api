@@ -157,6 +157,12 @@ class UserController extends Controller
             return $this->userNotFound();
         }
 
+        $connectedUser = $this->get('security.token_storage')->getToken()->getUser();
+
+        if ($user->getId() !== $connectedUser->getId()){
+            return \FOS\RestBundle\View\View::create(['message' => 'Unauthorized request'], Response::HTTP_FORBIDDEN);
+        }
+
         if ($clearMissing) {
             $options = ['validation_groups'=>['Default', 'FullUpdate']];
         } else {
@@ -194,13 +200,19 @@ class UserController extends Controller
      * 
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
      * @Rest\Delete("/users/{id}")
-     * @param Request $request
      */
     public function removeUserAction(Request $request)
     {
         $em = $this->get('doctrine.orm.entity_manager');
         $user = $em->getRepository("AppBundle:User")
             ->find($request->get('id'));
+
+        $connectedUser = $this->get('security.token_storage')->getToken()->getUser();
+
+        if ($user->getId() !== $connectedUser->getId()){
+            return \FOS\RestBundle\View\View::create(['message' => 'Unauthorized request'], Response::HTTP_FORBIDDEN);
+        }
+
         if ($user){
             $em->remove($user);
             $em->flush();
