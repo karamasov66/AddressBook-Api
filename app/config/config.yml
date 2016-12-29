@@ -94,7 +94,7 @@ jms_serializer:
 nelmio_api_doc:
     sandbox:
         enabled:  true
-        endpoint: http://localhost/AddressBook-Api/web/app_dev.php/
+        endpoint: http://localhost/AddressBook-Api/web
 
         authentication:
             name: X-Auth-Token
