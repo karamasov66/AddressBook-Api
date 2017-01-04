@@ -1,0 +1,374 @@
+{
+    "swaggerVersion": "1.2",
+    "apiVersion": "1.0.0",
+    "basePath": "\/",
+    "resourcePath": "\/users",
+    "apis": [
+        {
+            "path": "\/users",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "R\u00e9cup\u00e8re la liste des utilisateurs de l'application",
+                    "nickname": "get_users",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "See standard HTTP status code reason for 200",
+                            "responseModel": "AppBundle.Entity.User"
+                        }
+                    ],
+                    "type": "AppBundle.Entity.User"
+                },
+                {
+                    "method": "POST",
+                    "summary": "Cr\u00e9e un utilisateur dans l'application",
+                    "nickname": "post_users",
+                    "parameters": [
+                        {
+                            "paramType": "form",
+                            "name": "firstname",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "lastname",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "plainPassword",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "email",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 201,
+                            "message": "Cr\u00e9ation avec succ\u00e8s",
+                            "responseModel": "AppBundle.Entity.User"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Formulaire invalide",
+                            "responseModel": "AppBundle.Form.UserType.ErrorResponse"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "\/users\/{id}",
+            "operations": [
+                {
+                    "method": "DELETE",
+                    "summary": "Supprime un utilisateur",
+                    "nickname": "delete_users",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "string",
+                            "required": true
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "Supprim\u00e9 avec succ\u00e8s"
+                        },
+                        {
+                            "code": 404,
+                            "message": "Ressource non trouv\u00e9"
+                        }
+                    ]
+                },
+                {
+                    "method": "PATCH",
+                    "summary": "Met \u00e0 jour partiellement un utilisateur",
+                    "nickname": "patch_users",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "firstname",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "lastname",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "plainPassword",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "email",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "Requ\u00eate trait\u00e9e avec succ\u00e8s",
+                            "responseModel": "AppBundle.Entity.User"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Formulaire invalide",
+                            "responseModel": "AppBundle.Form.UserType.ErrorResponse"
+                        }
+                    ],
+                    "type": "AppBundle.Entity.User"
+                },
+                {
+                    "method": "PUT",
+                    "summary": "Met \u00e0 jour enti\u00e8rement un utilisateur",
+                    "nickname": "put_users",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "firstname",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "lastname",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "plainPassword",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "email",
+                            "type": "string"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "Requ\u00eate trait\u00e9e avec succ\u00e8s",
+                            "responseModel": "AppBundle.Entity.User"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Formulaire invalide",
+                            "responseModel": "AppBundle.Form.UserType.ErrorResponse"
+                        }
+                    ],
+                    "type": "AppBundle.Entity.User"
+                }
+            ]
+        },
+        {
+            "path": "\/users\/{user_id}",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "R\u00e9cup\u00e8re un utilisateur de l'application",
+                    "nickname": "get_users",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "user_id",
+                            "type": "string",
+                            "required": true
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "See standard HTTP status code reason for 200",
+                            "responseModel": "Contact"
+                        }
+                    ],
+                    "type": "Contact"
+                }
+            ]
+        }
+    ],
+    "models": {
+        "AppBundle.Entity.Contact": {
+            "id": "AppBundle.Entity.Contact",
+            "description": "array of objects (Contact)",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "integer",
+                    "format": "int32"
+                },
+                "gender": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "firstname": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "lastname": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "street": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "city": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "postCode": {
+                    "type": "integer",
+                    "description": "integer",
+                    "format": "int32"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "description": "DateTime",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "gender"
+            ]
+        },
+        "AppBundle.Entity.User": {
+            "id": "AppBundle.Entity.User",
+            "description": "",
+            "properties": {
+                "firstname": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "lastname": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "plainPassword": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "description": "integer",
+                    "format": "int32"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "description": "DateTime",
+                    "format": "date-time"
+                },
+                "contacts": {
+                    "type": "array",
+                    "description": "array of objects (Contact)",
+                    "items": {
+                        "$ref": "AppBundle.Entity.Contact"
+                    }
+                }
+            },
+            "required": [
+                "firstname",
+                "lastname",
+                "email",
+                "plainPassword"
+            ]
+        },
+        "FieldErrors": {
+            "id": "FieldErrors",
+            "description": "Errors on the parameter",
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "description": "array of errors",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": []
+        },
+        "AppBundle.Form.UserType.FormErrors": {
+            "id": "AppBundle.Form.UserType.FormErrors",
+            "description": "Errors",
+            "properties": {
+                "firstname": {
+                    "$ref": "FieldErrors"
+                },
+                "lastname": {
+                    "$ref": "FieldErrors"
+                },
+                "plainPassword": {
+                    "$ref": "FieldErrors"
+                },
+                "email": {
+                    "$ref": "FieldErrors"
+                }
+            },
+            "required": []
+        },
+        "AppBundle.Form.UserType.ErrorResponse": {
+            "id": "AppBundle.Form.UserType.ErrorResponse",
+            "description": "",
+            "properties": {
+                "status_code": {
+                    "type": "integer",
+                    "description": "The status code",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "The error message"
+                },
+                "errors": {
+                    "$ref": "AppBundle.Form.UserType.FormErrors"
+                }
+            },
+            "required": []
+        },
+        "Contact": {
+            "id": "Contact",
+            "description": "",
+            "properties": [],
+            "required": []
+        }
+    },
+    "produces": [],
+    "consumes": [],
+    "authorizations": {
+        "apiKey": {
+            "type": "apiKey",
+            "passAs": "header",
+            "keyname": "X-Auth-Token"
+        }
+    }
+}

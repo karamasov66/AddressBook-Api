@@ -1,0 +1,73 @@
+{
+    "swaggerVersion": "1.2",
+    "apis": [
+        {
+            "path": "\/auth-tokens",
+            "description": null
+        },
+        {
+            "path": "\/contacts",
+            "description": null
+        },
+        {
+            "path": "\/contacts",
+            "description": null
+        },
+        {
+            "path": "\/contacts",
+            "description": null
+        },
+        {
+            "path": "\/contacts",
+            "description": null
+        },
+        {
+            "path": "\/users",
+            "description": null
+        },
+        {
+            "path": "\/users",
+            "description": null
+        },
+        {
+            "path": "\/users",
+            "description": null
+        },
+        {
+            "path": "\/users",
+            "description": null
+        },
+        {
+            "path": "\/users",
+            "description": null
+        },
+        {
+            "path": "\/users",
+            "description": null
+        },
+        {
+            "path": "\/users-contacts",
+            "description": null
+        },
+        {
+            "path": "\/users-contacts",
+            "description": null
+        }
+    ],
+    "apiVersion": "1.0.0",
+    "info": {
+        "title": "AddressBook-Api",
+        "description": "Carnet d'adresse en ligne",
+        "TermsOfServiceUrl": null,
+        "contact": null,
+        "license": null,
+        "licenseUrl": null
+    },
+    "authorizations": {
+        "apiKey": {
+            "type": "apiKey",
+            "passAs": "header",
+            "keyname": "X-Auth-Token"
+        }
+    }
+}

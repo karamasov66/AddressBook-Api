@@ -116,7 +116,7 @@ nelmio_api_doc:
     swagger:
         api_base_path:        /
         swagger_version:      '1.2'
-        api_version:          '1.0.0'
+        api_version:          '1.0'
         info:
             title:                AddressBook-Api
             description:          "Carnet d'adresse en ligne"

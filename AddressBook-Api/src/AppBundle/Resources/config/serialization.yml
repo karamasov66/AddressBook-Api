@@ -1,0 +1,44 @@
+# src/AppBundle/Resources/config/serialization.yml
+AppBundle\Entity\User:
+    attributes:
+        id:
+            groups: ['user', 'contact', 'auth-token']
+        firstname:
+            groups: ['user', 'contact', 'auth-token']
+        lastname:
+            groups: ['user', 'contact', 'auth-token']
+        email:
+            groups: ['user', 'contact', 'auth-token']
+        contacts:
+            groups: ['user']
+
+
+AppBundle\Entity\Contact:
+    attributes:
+        id:
+            groups: ['user', 'contact']
+        gender:
+            groups: ['user', 'contact']
+        firstname:
+            groups: ['user', 'contact']
+        lastname:
+            groups: ['user', 'contact']
+        street:
+            groups: ['user', 'contact']
+        city:
+            groups: ['user', 'contact']
+        postcode:
+            groups: ['user', 'contact']
+        createdOn:
+            groups: ['user', 'contact']
+
+AppBundle\Entity\AuthToken:
+    attributes:
+        id:
+            groups: ['auth-token']
+        value:
+            groups: ['auth-token']
+        createdOn:
+            groups: ['auth-token']
+        user:
+            groups: ['auth-token']

@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\HasLifeCycleCallbacks()
  */
 class User implements UserInterface
 {
@@ -56,6 +57,11 @@ class User implements UserInterface
      * @ORM\Column(name="createdOn", type="datetime", nullable= true)
      */
     private $createdOn;
+
+    /**
+     * @ORM\Column(name="updatedOn", type="datetime", nullable=true)
+     */
+    private $updatedOn;
 
     /**
      * @ORM\ManyToMany(targetEntity="Contact", cascade={"persist"})
@@ -257,5 +263,37 @@ class User implements UserInterface
     {
         // Suppression des données sensibles
         $this->plainPassword = null;
+    }
+
+    /**
+     * Set updatedOn
+     *
+     * @param \DateTime $updatedOn
+     *
+     * @return User
+     */
+    public function setUpdatedOn($updatedOn)
+    {
+        $this->updatedOn = $updatedOn;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedOn
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedOn()
+    {
+        return $this->updatedOn;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdateDate()
+    {
+        $this->setUpdatedOn(new \DateTime());
     }
 }

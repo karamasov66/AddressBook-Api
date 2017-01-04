@@ -4,12 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Contact
  *
  * @ORM\Table(name="contact")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ContactRepository")
+ * @ORM\HasLifeCycleCallbacks()
  */
 class Contact
 {
@@ -75,6 +77,11 @@ class Contact
      * @ORM\Column(name="createdOn", type="datetime", nullable= true)
      */
     private $createdOn;
+
+    /**
+     * @ORM\Column(name="updatedOn", type="datetime", nullable=true)
+     */
+    private $updatedOn;
     
 
     /**
@@ -251,4 +258,36 @@ class Contact
         return $this->createdOn;
     }
 
+
+    /**
+     * Set updatedOn
+     *
+     * @param \DateTime $updatedOn
+     *
+     * @return Contact
+     */
+    public function setUpdatedOn($updatedOn)
+    {
+        $this->updatedOn = $updatedOn;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedOn
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedOn()
+    {
+        return $this->updatedOn;
+    }
+
+    /**
+     * @Orm\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdatedOn(new \DateTime());
+}
 }

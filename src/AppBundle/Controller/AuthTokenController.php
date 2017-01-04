@@ -71,8 +71,8 @@ class AuthTokenController extends Controller
 
     /**
      * @ApiDoc
-     * resource=true,
-     *    description="Supprime un token d'authentification"
+ *      resource=true,
+     *  description="Supprime un token d'authentification"
      *)
      *
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)

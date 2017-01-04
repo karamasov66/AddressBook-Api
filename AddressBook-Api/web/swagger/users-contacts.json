@@ -1,0 +1,203 @@
+{
+    "swaggerVersion": "1.2",
+    "apiVersion": "1.0.0",
+    "basePath": "\/",
+    "resourcePath": "\/users-contacts",
+    "apis": [
+        {
+            "path": "\/users\/{user_id}\/contacts",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "R\u00e9cup\u00e8re la liste des contacts d'un utilisateur",
+                    "nickname": "get_users-contacts",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "user_id",
+                            "type": "string",
+                            "required": true
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "See standard HTTP status code reason for 200",
+                            "responseModel": "AppBundle.Entity.Contact"
+                        }
+                    ],
+                    "type": "AppBundle.Entity.Contact"
+                },
+                {
+                    "method": "POST",
+                    "summary": "Cr\u00e9e un contact dans l'application",
+                    "nickname": "post_users-contacts",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "user_id",
+                            "type": "string",
+                            "required": true
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "gender",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "firstname",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "lastname",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "street",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "city",
+                            "type": "string"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "postCode",
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 201,
+                            "message": "Cr\u00e9ation avec succ\u00e8s",
+                            "responseModel": "AppBundle.Entity.Contact"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Formulaire invalide",
+                            "responseModel": "AppBundle.Form.ContactType.ErrorResponse"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "AppBundle.Entity.Contact": {
+            "id": "AppBundle.Entity.Contact",
+            "description": "",
+            "properties": {
+                "gender": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "description": "integer",
+                    "format": "int32"
+                },
+                "firstname": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "lastname": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "street": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "city": {
+                    "type": "string",
+                    "description": "string"
+                },
+                "postCode": {
+                    "type": "integer",
+                    "description": "integer",
+                    "format": "int32"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "description": "DateTime",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "gender"
+            ]
+        },
+        "FieldErrors": {
+            "id": "FieldErrors",
+            "description": "Errors on the parameter",
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "description": "array of errors",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": []
+        },
+        "AppBundle.Form.ContactType.FormErrors": {
+            "id": "AppBundle.Form.ContactType.FormErrors",
+            "description": "Errors",
+            "properties": {
+                "gender": {
+                    "$ref": "FieldErrors"
+                },
+                "firstname": {
+                    "$ref": "FieldErrors"
+                },
+                "lastname": {
+                    "$ref": "FieldErrors"
+                },
+                "street": {
+                    "$ref": "FieldErrors"
+                },
+                "city": {
+                    "$ref": "FieldErrors"
+                },
+                "postCode": {
+                    "$ref": "FieldErrors"
+                }
+            },
+            "required": []
+        },
+        "AppBundle.Form.ContactType.ErrorResponse": {
+            "id": "AppBundle.Form.ContactType.ErrorResponse",
+            "description": "",
+            "properties": {
+                "status_code": {
+                    "type": "integer",
+                    "description": "The status code",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "The error message"
+                },
+                "errors": {
+                    "$ref": "AppBundle.Form.ContactType.FormErrors"
+                }
+            },
+            "required": []
+        }
+    },
+    "produces": [],
+    "consumes": [],
+    "authorizations": {
+        "apiKey": {
+            "type": "apiKey",
+            "passAs": "header",
+            "keyname": "X-Auth-Token"
+        }
+    }
+}

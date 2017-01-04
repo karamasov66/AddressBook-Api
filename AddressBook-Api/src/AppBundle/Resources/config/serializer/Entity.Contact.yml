@@ -1,0 +1,20 @@
+# src/AppBundle/Resources/config/serializer/Entity.Contact.yml
+AppBundle\Entity\Contact:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['user', 'contact']
+        gender:
+            groups: ['user', 'contact']
+        firstname:
+            groups: ['user', 'contact']
+        lastname:
+            groups: ['user', 'contact']
+        street:
+            groups: ['user', 'contact']
+        city:
+            groups: ['user', 'contact']
+        postcode:
+            groups: ['user', 'contact']
+        createdOn:
+            groups: ['user', 'contact']
